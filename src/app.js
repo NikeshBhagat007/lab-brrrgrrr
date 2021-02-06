@@ -104,13 +104,13 @@ function renderLettuce() {
 
   document.querySelector(".btn-patty").onclick = function () {
   state.Patty = !state.Patty;
-  renderAll("btn-patty",state.patty);
+  renderAll("btn-patty",state.Patty);
 };
 
 // Trial 2 - Setup event listener for the cheese button
   document.querySelector(".btn-cheese").onclick = function () {
   state.Cheese = !state.Cheese;
-  renderAll("btn-cheese",state.cheese);
+  renderAll("btn-cheese",state.Cheese);
 };
 
 // Trial 2 - Setup event listener for the tomatoes button
@@ -134,12 +134,58 @@ function renderLettuce() {
 //Challenge 1 - Add/Remove the class active to the buttons based on state
 let renderButtons = (btnName,btnStatus) =>
 {
-  var status = document.getElementById(btnName);
-  status.classList.toggle("active");
-
+  //console.log(`.${btnName}`,btnStatus);
+  var status = document.querySelector(`.${btnName}`);
+  //console.log(status);
+  //status.classList.toggle("active");
 } 
 
 //Challenge 2 - Render only the items selected in the ingredients board based on the state
+function renderIngredientsBoard()
+{
+      var ingredient = document.getElementsByClassName("items");  //fetch items
+      //console.log(ingredient);
+      if(state.Patty)
+      {
+        ingredient[0].style.display ="inherit";
+      }
+      else
+      {
+        ingredient[0].style.display= "none";
+      }
+      if(state.Cheese)
+      {
+        ingredient[1].style.display ="inherit";
+      }
+      else
+      {
+        ingredient[1].style.display= "none";
+      }
+      if(state.Tomatoes)
+      {
+        ingredient[2].style.display ="inherit";
+      }
+      else
+      {
+        ingredient[2].style.display= "none";
+      }
+      if(state.Onions)
+      {
+        ingredient[3].style.display ="inherit";
+      }
+      else
+      {
+        ingredient[3].style.display= "none";
+      }
+      if(state.Lettuce)
+      {
+        ingredient[4].style.display ="inherit";
+      }
+      else
+      {
+        ingredient[4].style.display= "none";
+      }
+}
 
 
 //Judgement 1
@@ -148,14 +194,20 @@ let renderButtons = (btnName,btnStatus) =>
 
 let renderPrice = () => 
 {
+  console.log("inside render price");
   let total = 0;
   for(const item in state)
   {
-    if(item)
+    //console.log(item);
+    //console.log(state[item]);
+    if(state[item] == true)
     {
+      //console.log(ingredients[`${item}`])
       total += ingredients[`${item}`];
+
     }
   }
-  document.querySelector("price-details").innerHTML = `INR ${total}`;
+  console.log( `INR ${total}`);
+  document.getElementsByClassName(".price-details").innerHTML = `INR ${total}`;
 };
 
